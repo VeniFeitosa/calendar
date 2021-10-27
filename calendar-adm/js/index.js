@@ -23,10 +23,12 @@ const addButton = document.querySelector('#addButton')
 const addNewButton = document.querySelector('#addNewButton')
 const backButton = document.querySelector('#backButton')
 const backButton2 = document.querySelector('#backButton2')
+const delButton = document.querySelector('#delButton')
 $(saveButton).hide()
 $(addNewButton).hide()
 $(saveNewButton).hide()
 $(backButton2).hide()
+$(delButton).hide()
 
 const data = new Date()
 
@@ -87,6 +89,9 @@ btn.addEventListener('click', () => {
     const diasDealer = document.querySelector(".dias")
 
     diasDealer.addEventListener('click', (e) => {
+        
+        modalTitle2.dataset.id = "0"
+        
         let dataDay
         let day
 
@@ -94,12 +99,22 @@ btn.addEventListener('click', () => {
 
         window.onclick = (e)=>{
             // console.log(e.target)
+            const modal2 = document.querySelectorAll('.modal')[1]
+
             if (e.target == modal) {
+                modalTitle2.dataset.id = "0"
+                
                 $(dayContent).show()
                 $(form).hide()
                 $(saveButton).hide()
                 $(addNewButton).hide()
                 $(editButton).show()
+                $(delButton).hide()
+
+            }
+
+            if (e.target == modal2) {
+                modalTitle2.dataset.id = "0"
             }
         }
 
@@ -195,6 +210,7 @@ addNewButton.addEventListener('click', () =>{
     $(form).show();
     // $(saveButton).show()
     $(editButton).hide()
+    $(delButton).hide()
     $(addNewButton).hide()
     $(backButton).hide()
     $(backButton2).show()
@@ -211,6 +227,7 @@ addButton.addEventListener('click', () =>{
     $(saveButton).show()
     $(saveNewButton).hide()
     $(editButton).hide()
+    $(delButton).hide()
     $(addNewButton).hide()
     $(backButton).show()
     $(backButton2).hide()
@@ -222,6 +239,8 @@ backButton.addEventListener('click', () => {
     $(saveButton).hide()
     $(saveNewButton).hide()
     $(addNewButton).hide()
+
+    modalTitle2.dataset.id = "0"
     // $(editButton).show()
     // console.log('exit')
 })
@@ -245,6 +264,8 @@ exitButton.forEach(element => {
         // $(form).hide()
         $(saveButton).hide()
         $(saveNewButton).hide()
+
+        modalTitle2.dataset.id = "0"
         // $(addNewButton).show()
         // $(editButton).show()
         // console.log('exit')
@@ -260,6 +281,7 @@ modalContent.addEventListener('click', (e)=>{
         $(saveButton).hide()
         $(dayContent).show()
         $(editButton).show()
+        $(delButton).show()
 
         const index = e.target.dataset.index
         $.ajax({
@@ -286,11 +308,17 @@ saveButton.addEventListener('click', () => {
     $(form).hide()
     $(saveButton).hide()
     $(editButton).show()
+    $(delButton).show()
 
     $.ajax({
         type: "post",
         url: "./actions/save.php",
-        data: {message:dayContent.innerHTML, title:modalTitle2.innerHTML, date:messageDate},
+        data: {
+            message:dayContent.innerHTML,
+            title:modalTitle2.innerHTML,
+            date:messageDate,
+            id:messageId
+        },
         success: function (response) {
             if (response == "successSave") {
                 toastr.success("Salvo com sucesso.", "Pronto!")
@@ -315,12 +343,14 @@ saveNewButton.addEventListener('click', () => {
     $(form).hide()
     $(saveNewButton).hide()
     $(editButton).show()
+    $(delButton).show()
 
     $.ajax({
         type: "post",
         url: "./actions/saveNew.php",
         data: {message:dayContent.innerHTML, title:modalTitle2.innerHTML, date:messageDate},
         success: function (response) {
+            console.log(response)
             if (response == "successSave") {
                 toastr.success("Salvo com sucesso.", "Pronto!")
                 tbody.innerHTML = ''
@@ -341,6 +371,34 @@ saveNewButton.addEventListener('click', () => {
     });
 })
 
+delButton.addEventListener('click', ()=>{
+    const res = window.confirm("Você quer mesmo excluir a anotação?")
+    const messageId = modalTitle2.dataset.id
+
+    if (res) {
+        //deletar a mensagem
+        console.log('excluir id = ' + messageId)
+        $.ajax({
+            type: "get",
+            url: "./actions/delete.php",
+            data: {id:messageId},
+            success: function (response) {
+                if (response == 'successDel') {
+                    toastr.success("Deletado com sucesso.", "Pronto!")
+                    tbody.innerHTML = ''
+                    generateContent(messageDate)
+                    // $(dayClicked).children().find('.dateBadge').remove()
+                } else {
+                    toastr.error("Erro ao deletar.", "Erro!")
+                }
+            }
+        });
+        backButton.click()
+    } else {
+        return
+    }
+})
+
 function generateContent(messageDate){
     $.ajax({
         type: "get",
@@ -351,6 +409,7 @@ function generateContent(messageDate){
                 $(noContent).show()
                 $(addNewButton).show()
                 $(addButton).hide()
+                $(dayClicked).children().find('.dateBadge').remove()
             }else{
                 $(noContent).hide()
                 $(addNewButton).hide()

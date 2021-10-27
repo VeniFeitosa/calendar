@@ -10,4 +10,4 @@ $c = new Calendar();
 $c->connect();
 $c->saveNew($title, $message, $date);
 
-// echo "mensagem ---> | $message | data ---> | $date |";
+// echo "Título ---> $title | mensagem ---> | $message | data ---> | $date |";

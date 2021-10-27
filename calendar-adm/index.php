@@ -100,6 +100,7 @@
                     <button type="button" class="btn btn-primary" id="saveButton" >Salvar</button>
                     <button type="button" class="btn btn-success" id="saveNewButton" >Salvar</button>
                     <button type="button" class="btn btn-primary" id="editButton" >Editar</button>
+                    <button type="button" class="btn btn-danger" id="delButton" >Excluir</button>
                 </div>
             </div>
         </div>
