@@ -82,3 +82,9 @@ textarea{
     width: 100%;
   }
 }
+
+@media (max-width: 991px){
+  #calendar{
+    width: 80%;
+  }
+}

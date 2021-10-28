@@ -51,7 +51,10 @@
                     <h4 class="modal-title" id="modal1"></h4>
                     <button type="button" class="btn-close exitButton" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <div class="modal-body" id="modal-body-1">
+                <div class="modal-body text-center" id="modal-body-1">
+                    <!-- <div class="spinner-border text-dark" role="status">
+                        <span class="visually-hidden">Loading...</span>
+                    </div> -->
                     <div class="noContent">
                         <h5>Sem anotações nessa data.</h5>
                     </div>

@@ -11,6 +11,7 @@ const btn = document.querySelector('#pesq')
 const editButton = document.querySelector('#editButton')
 const exitButton = Array.from(document.querySelectorAll('.exitButton'))
 const modal = document.querySelector('.modal')
+const modalBody1 = document.querySelector('#modal-body-1')
 const modalContent = document.querySelector('.modal-content')
 
 let messageDate
@@ -56,7 +57,6 @@ btn.addEventListener('click', () => {
     const ano = data.getFullYear()
     const mes = document.querySelector('#mes').value
 
-    // console.log(`${dia}/${mes}/${ano}`)
     $('#calendar').calendar({
         date: `${mes}/${dia}/${ano}`,
         enableMonthChange: false,
@@ -89,6 +89,9 @@ btn.addEventListener('click', () => {
     const diasDealer = document.querySelector(".dias")
 
     diasDealer.addEventListener('click', (e) => {
+        // $(modalBody1).append('<div class="spinner-border text-dark" role="status"><span class="visually-hidden">Loading...</span></div>')
+        $(noContent).hide()
+        showLoading(modalBody1)
         
         modalTitle2.dataset.id = "0"
         
@@ -98,7 +101,6 @@ btn.addEventListener('click', () => {
         dayClicked = e.target
 
         window.onclick = (e)=>{
-            // console.log(e.target)
             const modal2 = document.querySelectorAll('.modal')[1]
 
             if (e.target == modal) {
@@ -139,6 +141,8 @@ btn.addEventListener('click', () => {
             url: "./actions/load.php",
             data: {date:messageDate},
             success: function (response) {
+                // $(modalBody1).find('.spinner-border').remove()
+                hideLoading(modalBody1)
                 if (response == 'Sem anotações nessa data.') {
                     $(noContent).show()
                     $(addNewButton).show()
@@ -161,6 +165,13 @@ btn.addEventListener('click', () => {
 })
 
 //Funções
+function showLoading(element){
+    $(element).append('<div class="spinner-border text-dark" role="status"><span class="visually-hidden">Loading...</span></div>')
+}
+function hideLoading(element){
+    $(element).find('.spinner-border').remove()
+}
+
 function generateTable(element, index) {
     const tr = document.createElement('tr')
     const td = document.createElement('td')
@@ -191,7 +202,6 @@ function generateTable(element, index) {
 // Eventos dos botoões
 
 editButton.addEventListener('click', () =>{
-    console.log()
     $(dayContent).hide()
     titulo.value = modalTitle2.innerHTML
     dayContentEdit.value = dayContent.innerHTML
@@ -242,7 +252,6 @@ backButton.addEventListener('click', () => {
 
     modalTitle2.dataset.id = "0"
     // $(editButton).show()
-    // console.log('exit')
 })
 
 backButton2.addEventListener('click', () => {
@@ -255,7 +264,6 @@ backButton2.addEventListener('click', () => {
     $(addNewButton).show()
     $(addButton).hide()
     // $(editButton).show()
-    // console.log('exit')
 })
 
 exitButton.forEach(element => {
@@ -268,7 +276,6 @@ exitButton.forEach(element => {
         modalTitle2.dataset.id = "0"
         // $(addNewButton).show()
         // $(editButton).show()
-        // console.log('exit')
     })
 })
 
@@ -283,18 +290,24 @@ modalContent.addEventListener('click', (e)=>{
         $(editButton).show()
         $(delButton).show()
 
+        modalTitle2.innerHTML = ''
+        dayContent.innerHTML = ''
+
         const index = e.target.dataset.index
+        showLoading(modalTitle2)
+        showLoading(dayContent)
         $.ajax({
             type: "get",
             url: "./actions/load.php",
             data: {date:messageDate},
             success: function (response) {
+                hideLoading(modalTitle2)
+                hideLoading(dayContent)
                 const dbElement = JSON.parse(response)
 
                 modalTitle2.innerHTML = dbElement[index].titulo
                 modalTitle2.setAttribute('data-id', dbElement[index].id)
                 dayContent.innerHTML = dbElement[index].content
-                // console.log(dbElement[index].content)
             }
         });
     }
@@ -331,44 +344,50 @@ saveButton.addEventListener('click', () => {
                 dayContent.innerHTML = 'Sem anotações nessa data.'
             }else {
                 toastr.error("Erro ao salvar.", "Erro!")
+                backButton.click()
             }
         }
     });
 })
 
 saveNewButton.addEventListener('click', () => {
-    dayContent.innerHTML = dayContentEdit.value
-    modalTitle2.innerHTML = titulo.value
-    $(dayContent).show()
-    $(form).hide()
-    $(saveNewButton).hide()
-    $(editButton).show()
-    $(delButton).show()
+    if (titulo.value == '') {
+        toastr.warning('O Título está vazio!')
+    }else if(dayContentEdit.value == ''){
+        toastr.warning('O conteúdo está vazio!')
+    }else{
+        dayContent.innerHTML = dayContentEdit.value
+        modalTitle2.innerHTML = titulo.value
+        $(dayContent).show()
+        $(form).hide()
+        $(saveNewButton).hide()
+        $(editButton).show()
+        $(delButton).show()
 
-    $.ajax({
-        type: "post",
-        url: "./actions/saveNew.php",
-        data: {message:dayContent.innerHTML, title:modalTitle2.innerHTML, date:messageDate},
-        success: function (response) {
-            console.log(response)
-            if (response == "successSave") {
-                toastr.success("Salvo com sucesso.", "Pronto!")
-                tbody.innerHTML = ''
-                generateContent(messageDate)
-                // loadCalendar(data, messageDate)
-                if (window.innerWidth <= 425) {
-                    $(dayClicked).children().append('<span class="dateBadge position-absolute top-0 start-120 translate-middle p-1 bg-warning border border-light rounded-circle"></span>')
-                }else{
-                    $(dayClicked).children().append('<span class="dateBadge position-absolute top-0 start-100 translate-middle p-1 bg-warning border border-light rounded-circle"></span>')
+        $.ajax({
+            type: "post",
+            url: "./actions/saveNew.php",
+            data: {message:dayContent.innerHTML, title:modalTitle2.innerHTML, date:messageDate},
+            success: function (response) {
+                if (response == "successSave") {
+                    toastr.success("Salvo com sucesso.", "Pronto!")
+                    tbody.innerHTML = ''
+                    generateContent(messageDate)
+                    // loadCalendar(data, messageDate)
+                    if (window.innerWidth <= 425) {
+                        $(dayClicked).children().append('<span class="dateBadge position-absolute top-0 start-120 translate-middle p-1 bg-warning border border-light rounded-circle"></span>')
+                    }else{
+                        $(dayClicked).children().append('<span class="dateBadge position-absolute top-0 start-100 translate-middle p-1 bg-warning border border-light rounded-circle"></span>')
+                    }
+                }else if(response == "messageEmpty"){
+                    toastr.success("Salvo com sucesso.", "Pronto!")
+                    dayContent.innerHTML = 'Sem anotações nessa data.'
+                }else {
+                    toastr.error("Erro ao salvar.", "Erro!")
                 }
-            }else if(response == "messageEmpty"){
-                toastr.success("Salvo com sucesso.", "Pronto!")
-                dayContent.innerHTML = 'Sem anotações nessa data.'
-            }else {
-                toastr.error("Erro ao salvar.", "Erro!")
             }
-        }
-    });
+        });
+    }
 })
 
 delButton.addEventListener('click', ()=>{
@@ -377,7 +396,6 @@ delButton.addEventListener('click', ()=>{
 
     if (res) {
         //deletar a mensagem
-        console.log('excluir id = ' + messageId)
         $.ajax({
             type: "get",
             url: "./actions/delete.php",
@@ -400,11 +418,13 @@ delButton.addEventListener('click', ()=>{
 })
 
 function generateContent(messageDate){
+    showLoading(modalBody1)
     $.ajax({
         type: "get",
         url: "./actions/load.php",
         data: {date:messageDate},
         success: function (response) {
+            hideLoading(modalBody1)
             if (response == 'Sem anotações nessa data.') {
                 $(noContent).show()
                 $(addNewButton).show()
