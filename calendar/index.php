@@ -51,7 +51,7 @@
                     <h4 class="modal-title" id="modal1"></h4>
                     <button type="button" class="btn-close" id="exitButton" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <div class="modal-body" id="modal-body-1">
+                <div class="modal-body text-center" id="modal-body-1">
                     <div class="noContent">
                         <h5>Sem anotações nessa data.</h5>
                     </div>
@@ -60,14 +60,8 @@
                             <tbody>
                             </tbody>
                         </table>
-                        </div>
                     </div>
-                    <!-- <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" id="exitButton" data-bs-dismiss="modal">Fechar</button>
-                        <button type="button" class="btn btn-primary" id="editButton" >Editar</button>
-                        <button type="button" class="btn btn-primary" id="saveButton" >Salvar</button>
-                        <button type="button" class="btn btn-primary" id="addButton" >Adicionar</button>
-                    </div> -->
+                </div>
                 </div>
             </div>
         </div>

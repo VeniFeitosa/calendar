@@ -52,9 +52,6 @@
                     <button type="button" class="btn-close exitButton" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body text-center" id="modal-body-1">
-                    <!-- <div class="spinner-border text-dark" role="status">
-                        <span class="visually-hidden">Loading...</span>
-                    </div> -->
                     <div class="noContent">
                         <h5>Sem anotações nessa data.</h5>
                     </div>
@@ -66,8 +63,6 @@
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <!-- <button type="button" class="btn btn-secondary" id="exitButton" data-bs-dismiss="modal">Fechar</button> -->
-                        <!-- <button type="button" class="btn btn-primary" id="editButton" >Editar</button> -->
                         <button type="button" class="btn btn-success" id="addNewButton" data-bs-target="#exampleModalToggle2" data-bs-toggle="modal">Adicionar</button>
                         <button type="button" class="btn btn-primary" id="addButton" data-bs-target="#exampleModalToggle2" data-bs-toggle="modal">Adicionar</button>
                     </div>

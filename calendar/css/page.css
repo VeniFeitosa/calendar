@@ -30,7 +30,7 @@ body{
 
 #calendar{
   margin-top: 20px;
-  width: 75%;
+  width: 60%;
 }
 
 #pesq{
@@ -55,30 +55,12 @@ body{
 .noContent{
   display: none;
 }
-/* .dateBadge{
-  top: 13px;
-  right: -5px;
-} */
-
-/* RESPONSIVE */
-/* @media (max-width: 1440px){
-    .dateBadge{
-    top: 4px;
-    right: -34px;
-  }
+textarea{
+  resize: none;
 }
-@media (max-width: 1024px){
-  .dateBadge{
-  top: 4px;
-  right: -19px;
-  }
+.tdButton{
+  width: 25%;
 }
-@media (max-width: 768px){
-  .dateBadge{
-  top: 4px;
-  right: -11px;
-  }
-} */
 
 @media (max-width: 425px){
   .form-group{
@@ -98,5 +80,11 @@ body{
 @media (max-width: 767px){
   #calendar{
     width: 100%;
+  }
+}
+
+@media (max-width: 991px){
+  #calendar{
+    width: 80%;
   }
 }
