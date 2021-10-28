@@ -81,11 +81,6 @@ class Calendar {
             $result = $sql->fetchAll(PDO::FETCH_ASSOC);
             echo json_encode($result);
 
-            // if ($result['anotacao'] == '') {
-            //     echo 'Sem anotações nessa data.';               
-            // } else {
-            //     echo $result['anotacao'];
-            // }
         }else{
             //nao existe anotacao
             echo 'Sem anotações nessa data.';

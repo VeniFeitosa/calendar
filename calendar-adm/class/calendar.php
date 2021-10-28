@@ -10,17 +10,6 @@ class Calendar {
         }
     }
 
-    // function insertMessage($title, $message, $id){
-    //     $sql = $this->db->prepare("INSERT INTO anotacao(titulo, content, id_data) VALUES($title, $message, $id)");
-
-    //     if ($sql->execute()) {
-    //         return true;
-    //     } else {
-    //         return false;
-    //     }
-        
-    // }
-
     function save($title ,$message, $date, $id){
 
         $sqlAlready = $this->db->prepare("SELECT content FROM anotacao WHERE id = ?");
@@ -133,12 +122,6 @@ class Calendar {
 
             $result = $sql->fetchAll(PDO::FETCH_ASSOC);
             echo json_encode($result);
-
-            // if ($result['anotacao'] == '') {
-            //     echo 'Sem anotações nessa data.';               
-            // } else {
-            //     echo $result['anotacao'];
-            // }
         }else{
             //nao existe anotacao
             echo 'Sem anotações nessa data.';
