@@ -88,26 +88,6 @@ class Calendar {
         
     }
 
-    function load($date){
-        $sql = $this->db->prepare("SELECT anotacao FROM anotacoes WHERE data_anot=?");
-        $sql->bindParam(1, $date);
-        $sql->execute();
-        if ($sql->rowCount() > 0) {
-            //existe uma anotação
-            $result = $sql->fetch(PDO::FETCH_ASSOC);
-            if ($result['anotacao'] == '') {
-                echo 'Sem anotações nessa data.';               
-            } else {
-                echo $result['anotacao'];
-            }
-            
-        }else{
-            //nao existe anotacao
-            echo 'Sem anotações nessa data.';
-        }
-
-    }
-
     function loadClient($date){
         $sql = $this->db->prepare("SELECT anotacao.id, anotacao.titulo, anotacao.content, data_anotacao.data_anot
          FROM anotacao JOIN data_anotacao 

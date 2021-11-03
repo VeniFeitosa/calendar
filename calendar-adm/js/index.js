@@ -5,11 +5,7 @@ const titulo = document.querySelector('.titulo')
 const modalTitle2 = document.querySelector('#modal2')
 const noContent = document.querySelector('.noContent')
 const tbody = document.querySelector('.contentM1')
-$(form).hide()
 
-const btn = document.querySelector('#pesq')
-const editButton = document.querySelector('#editButton')
-const exitButton = Array.from(document.querySelectorAll('.exitButton'))
 const modal = document.querySelector('.modal')
 const modalBody1 = document.querySelector('#modal-body-1')
 const modalContent = document.querySelector('.modal-content')
@@ -18,6 +14,9 @@ let messageDate
 let anyMessage
 let dayClicked
 
+const btn = document.querySelector('#pesq')
+const editButton = document.querySelector('#editButton')
+const exitButton = Array.from(document.querySelectorAll('.exitButton'))
 const saveButton = document.querySelector('#saveButton')
 const saveNewButton = document.querySelector('#saveNewButton')
 const addButton = document.querySelector('#addButton')
@@ -25,6 +24,8 @@ const addNewButton = document.querySelector('#addNewButton')
 const backButton = document.querySelector('#backButton')
 const backButton2 = document.querySelector('#backButton2')
 const delButton = document.querySelector('#delButton')
+
+$(form).hide()
 $(saveButton).hide()
 $(addNewButton).hide()
 $(saveNewButton).hide()
@@ -33,7 +34,7 @@ $(delButton).hide()
 
 const data = new Date()
 
-//toastr config
+//configuração das toasts
 toastr.options = {
     "closeButton": false,
     "debug": false,
@@ -52,11 +53,13 @@ toastr.options = {
     "hideMethod": "fadeOut"
   }
 
+//botão pesquisar
 btn.addEventListener('click', () => {
     const dia = data.getDate()
     const ano = data.getFullYear()
     const mes = document.querySelector('#mes').value
 
+    //carrega o calendário
     $('#calendar').calendar({
         date: `${mes}/${dia}/${ano}`,
         enableMonthChange: false,
@@ -64,6 +67,7 @@ btn.addEventListener('click', () => {
     })
     const dias = Array.from(document.querySelectorAll('.day')).filter((element) => !element.classList.contains('header'))
 
+    //pra cada dia do mês, checa se tem anotacao
     dias.forEach(element => {
         const data = new Date(element.dataset.date)
         const strDate = `${data.getDate()}/${data.getMonth() +1}/${data.getFullYear()}`
@@ -88,8 +92,8 @@ btn.addEventListener('click', () => {
 
     const diasDealer = document.querySelector(".dias")
 
+    //evento acionado quando algum dia é clickado
     diasDealer.addEventListener('click', (e) => {
-        // $(modalBody1).append('<div class="spinner-border text-dark" role="status"><span class="visually-hidden">Loading...</span></div>')
         $(noContent).hide()
         showLoading(modalBody1)
         
@@ -130,18 +134,16 @@ btn.addEventListener('click', () => {
             dataDay = e.target.dataset.date
         }
 
-        // e.classList.toggle('clicked')
-
         const data = new Date(dataDay)
         messageDate = `${data.getDate()}/${data.getMonth() +1}/${data.getFullYear()}`
         tbody.innerHTML = ''
 
+        //carrega o conteudo da modal 1
         $.ajax({
             type: "get",
             url: "./actions/load.php",
             data: {date:messageDate},
             success: function (response) {
-                // $(modalBody1).find('.spinner-border').remove()
                 hideLoading(modalBody1)
                 if (response == 'Sem anotações nessa data.') {
                     $(noContent).show()
@@ -172,6 +174,7 @@ function hideLoading(element){
     $(element).find('.spinner-border').remove()
 }
 
+//gera a tabela com as anotações
 function generateTable(element, index) {
     const tr = document.createElement('tr')
     const td = document.createElement('td')
@@ -218,7 +221,7 @@ addNewButton.addEventListener('click', () =>{
     dayContentEdit.value = ''
     modalTitle2.innerHTML = messageDate
     $(form).show();
-    // $(saveButton).show()
+
     $(editButton).hide()
     $(delButton).hide()
     $(addNewButton).hide()
@@ -244,38 +247,29 @@ addButton.addEventListener('click', () =>{
 })
 
 backButton.addEventListener('click', () => {
-    // $(dayContent).show()
-    // $(form).hide()
+    
     $(saveButton).hide()
     $(saveNewButton).hide()
     $(addNewButton).hide()
 
     modalTitle2.dataset.id = "0"
-    // $(editButton).show()
 })
 
 backButton2.addEventListener('click', () => {
-    // $(dayContent).show()
-    // $(form).hide()
     $(saveButton).hide()
     $(saveNewButton).hide()
     $(backButton).show()
     $(backButton2).hide()
     $(addNewButton).show()
     $(addButton).hide()
-    // $(editButton).show()
 })
 
 exitButton.forEach(element => {
     element.addEventListener('click', () => {
-        // $(dayContent).show()
-        // $(form).hide()
         $(saveButton).hide()
         $(saveNewButton).hide()
 
         modalTitle2.dataset.id = "0"
-        // $(addNewButton).show()
-        // $(editButton).show()
     })
 })
 
@@ -373,7 +367,6 @@ saveNewButton.addEventListener('click', () => {
                     toastr.success("Salvo com sucesso.", "Pronto!")
                     tbody.innerHTML = ''
                     generateContent(messageDate)
-                    // loadCalendar(data, messageDate)
                     if (window.innerWidth <= 425) {
                         $(dayClicked).children().append('<span class="dateBadge position-absolute top-0 start-120 translate-middle p-1 bg-warning border border-light rounded-circle"></span>')
                     }else{
@@ -405,7 +398,6 @@ delButton.addEventListener('click', ()=>{
                     toastr.success("Deletado com sucesso.", "Pronto!")
                     tbody.innerHTML = ''
                     generateContent(messageDate)
-                    // $(dayClicked).children().find('.dateBadge').remove()
                 } else {
                     toastr.error("Erro ao deletar.", "Erro!")
                 }

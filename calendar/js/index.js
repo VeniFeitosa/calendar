@@ -3,25 +3,27 @@ const dayContentEdit = document.querySelector('.dayContentEdit')
 const modalTitle2 = document.querySelector('#modal2')
 const noContet = document.querySelector('.noContent')
 const tbody = document.querySelector('tbody')
-$(dayContentEdit).hide()
 
-const btn = document.querySelector('#pesq')
-const editButton = document.querySelector('#editButton')
-const exitButton = document.querySelector('#exitButton')
 const modal = document.querySelector('.modal')
 const modalContent = document.querySelector('.modal-content')
 const modalBody1 = document.querySelector('#modal-body-1')
 
 let messageDate
 let anyMessage
+
 const saveButton = document.querySelector('#saveButton')
 const addButton = document.querySelector('#addButton')
+const btn = document.querySelector('#pesq')
+const editButton = document.querySelector('#editButton')
+const exitButton = document.querySelector('#exitButton')
+
 $(saveButton).hide();
+$(dayContentEdit).hide()
 $(addButton).hide()
 
 const data = new Date()
 
-//toastr config
+//configuração dos toasts
 toastr.options = {
     "closeButton": false,
     "debug": false,
@@ -40,18 +42,22 @@ toastr.options = {
     "hideMethod": "fadeOut"
   }
 
+//botão pesquisar
 btn.addEventListener('click', () => {
     const dia = data.getDate()
     const ano = data.getFullYear()
     const mes = document.querySelector('#mes').value
     
+    //carrega o calendário
     $('#calendar').calendar({
         date: `${mes}/${dia}/${ano}`,
         enableMonthChange: false,
         showTodayButton: false
     })
+
     const dias = Array.from(document.querySelectorAll('.day')).filter((element) => !element.classList.contains('header'))
     
+    //pra cada dia do mês, checa se tem anotacao
     dias.forEach(element => {
         const data = new Date(element.dataset.date)
         const strDate = `${data.getDate()}/${data.getMonth() +1}/${data.getFullYear()}`
@@ -75,12 +81,15 @@ btn.addEventListener('click', () => {
     });
     
     const diasDealer = document.querySelector(".dias")
+
+    //evento acionado quando algum dia é clickado
     diasDealer.addEventListener('click', (e) => {
         $(noContet).hide()
         showLoading(modalBody1)
 
         let dataDay
         let day
+
         window.onclick = (e)=>{
             if (e.target == modal) {
                 $(dayContent).show()
@@ -105,6 +114,7 @@ btn.addEventListener('click', () => {
         tbody.innerHTML = ''
         isAnyMessage(messageDate)
 
+        //carrega o conteudo da modal 1
         $.ajax({
             type: "get",
             url: "./actions/load.php",
@@ -136,6 +146,8 @@ function showLoading(element){
 function hideLoading(element){
     $(element).find('.spinner-border').remove()
 }
+
+//gera a tabela com as anotações
 function generateTable(element, index) {
     const tr = document.createElement('tr')
     const td = document.createElement('td')    
