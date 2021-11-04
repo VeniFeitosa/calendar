@@ -8,6 +8,6 @@ require_once('../class/calendar.php');
 
 $c = new Calendar();
 $c->connect();
+//salva uma anotação em uma nova data
+//ou em uma data existente, mas sem anotações
 $c->saveNew($title, $message, $date);
-
-// echo "Título ---> $title | mensagem ---> | $message | data ---> | $date |";

@@ -9,6 +9,5 @@ require_once('../class/calendar.php');
 
 $c = new Calendar();
 $c->connect();
+//salva uma nova anotação
 $c->save($title, $message, $date, $id);
-
-// echo "mensagem ---> | $message | data ---> | $date |";
