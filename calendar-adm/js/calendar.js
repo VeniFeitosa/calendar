@@ -1,3 +1,5 @@
+//used plugin https://github.com/wrick17/calendar-plugin
+
 (function ($) {
     var todayDate = new Date();
     let tMessage = false
@@ -12,8 +14,6 @@
       monthYearSeparator: " ",
       onClickDate: function (date) {
         const data = new Date(date)
-        // console.log(date)
-        // console.log(data.getMonth() +1) 
         const dayDiv = document.querySelector(`[data-date = "${data}"]`)
         const modalTitle = document.querySelector('.modal-title')
 
