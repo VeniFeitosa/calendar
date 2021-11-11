@@ -1,30 +1,51 @@
+//conteudo da segunda modal
 const dayContent = document.querySelector('.contentM2')
+//textarea na segunda modal
 const dayContentEdit = document.querySelector('.dayContentEdit')
+//div que contem os inputs da mensagem 
 const form = document.querySelector('.form')
+//input titulo
 const titulo = document.querySelector('.titulo')
+//titulo da segunda modal
 const modalTitle2 = document.querySelector('#modal2')
+//div para nenhuma anotacao
 const noContent = document.querySelector('.noContent')
+//tabela da modal 1
 const tbody = document.querySelector('.contentM1')
-
+//toda a primeira modal
 const modal = document.querySelector('.modal')
+//modal-body da primeira modal
 const modalBody1 = document.querySelector('#modal-body-1')
+//modal-content da primeira modal
 const modalContent = document.querySelector('.modal-content')
 
+//vai armazenar a data clicada
 let messageDate
-let anyMessage
+//vai reeber o DOM do dia clicado
 let dayClicked
 
+//botão pesquisar
 const btn = document.querySelector('#pesq')
+//botão editar
 const editButton = document.querySelector('#editButton')
+//botões de fechar a modal
 const exitButton = Array.from(document.querySelectorAll('.exitButton'))
+//salvar mensagem num dia com anotações
 const saveButton = document.querySelector('#saveButton')
+//botão salvar mensagem num dia sem anotações
 const saveNewButton = document.querySelector('#saveNewButton')
+//adicionar mensagem num dia com anotações
 const addButton = document.querySelector('#addButton')
+//adicionar mensagem num dia sem anotações
 const addNewButton = document.querySelector('#addNewButton')
+//botão voltar para a modal 1 com anotações
 const backButton = document.querySelector('#backButton')
+//botão voltar para a modal 1 sem anotações
 const backButton2 = document.querySelector('#backButton2')
+//botão deletar mensagem
 const delButton = document.querySelector('#delButton')
 
+//escondendo elementos não usados ao carregar a página
 $(form).hide()
 $(saveButton).hide()
 $(addNewButton).hide()
@@ -34,7 +55,7 @@ $(delButton).hide()
 
 const data = new Date()
 
-//configuração das toasts
+//configuração das toasts (alertas)
 toastr.options = {
     "closeButton": false,
     "debug": false,
