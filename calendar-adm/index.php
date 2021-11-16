@@ -21,25 +21,32 @@
 
 <body>
     <div class="container">
-        <div class="form-group">
-            <label for="mes" id="labelMes"> Selecione o mês </label>
-            <div class="input-group">
-            <select name="mes" id="mes" class="form-select">
-                <?php 
-                $monthMap = [
-                'Janeiro', 'Fevereiro', 'Março',
-                'Abril', 'Maio', 'Junho', 'Julho', 'Agosto',
-                'Setembro', 'Outubro', 'Novembro', 'Dezembro'];
-                
-                for ($i=0; $i < 12 ; $i++) {
-                    $mes = $i + 1;
-                    echo '<option value="' . $mes . '">' .  $monthMap[$i] . '</option>';
-                }
-                ?>
-            </select>
-            <button class="btn" type="button" id="pesq"> Pesquisar </button>
+        <div class="cont-header">
+            <div class="form-group">
+                <label for="mes" id="labelMes"> Selecione o mês </label>
+                <div class="input-group">
+                <select name="mes" id="mes" class="form-select">
+                    <?php 
+                    $monthMap = [
+                    'Janeiro', 'Fevereiro', 'Março',
+                    'Abril', 'Maio', 'Junho', 'Julho', 'Agosto',
+                    'Setembro', 'Outubro', 'Novembro', 'Dezembro'];
+                    
+                    for ($i=0; $i < 12 ; $i++) {
+                        $mes = $i + 1;
+                        echo '<option value="' . $mes . '">' .  $monthMap[$i] . '</option>';
+                    }
+                    ?>
+                </select>
+                <button class="btn" type="button" id="pesq"> Pesquisar </button>
+                </div>
+            </div>
+            <div class="form-check form-switch">
+                <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault">
+                <label class="form-check-label" for="flexSwitchCheckDefault">Modo Escuro</label>
             </div>
         </div>
+        
         <div id="calendar"></div>
     <div>
 
