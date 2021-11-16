@@ -55,7 +55,7 @@ $(delButton).hide()
 
 const data = new Date()
 
-//configuração das toasts (alertas)
+//configuração das toasts (alertas) show
 toastr.options = {
     "closeButton": false,
     "debug": false,
