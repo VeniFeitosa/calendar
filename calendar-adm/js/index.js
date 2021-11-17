@@ -44,6 +44,8 @@ const backButton = document.querySelector('#backButton')
 const backButton2 = document.querySelector('#backButton2')
 //botão deletar mensagem
 const delButton = document.querySelector('#delButton')
+//div checkbox darkmode
+const divDarkMode = document.querySelector('.form-switch')
 
 //escondendo elementos não usados ao carregar a página
 $(form).hide()
@@ -102,9 +104,9 @@ btn.addEventListener('click', () => {
             success: function (response) {
                 if (response) {
                     if (window.innerWidth <= 425) {
-                        $(elemSpan).append('<span class="dateBadge position-absolute top-0 start-120 translate-middle p-1 bg-warning border border-light rounded-circle"></span>')
+                        $(elemSpan).append('<span class="dateBadge position-absolute top-0 start-120 translate-middle p-1  border border-light rounded-circle"></span>')
                     }else{
-                        $(elemSpan).append('<span class="dateBadge position-absolute top-0 start-100 translate-middle p-1 bg-warning border border-light rounded-circle"></span>')
+                        $(elemSpan).append('<span class="dateBadge position-absolute top-0 start-100 translate-middle p-1  border border-light rounded-circle"></span>')
                     }
                 }
             }
@@ -389,9 +391,9 @@ saveNewButton.addEventListener('click', () => {
                     tbody.innerHTML = ''
                     generateContent(messageDate)
                     if (window.innerWidth <= 425) {
-                        $(dayClicked).children().append('<span class="dateBadge position-absolute top-0 start-120 translate-middle p-1 bg-warning border border-light rounded-circle"></span>')
+                        $(dayClicked).children().append('<span class="dateBadge position-absolute top-0 start-120 translate-middle p-1  border border-light rounded-circle"></span>')
                     }else{
-                        $(dayClicked).children().append('<span class="dateBadge position-absolute top-0 start-100 translate-middle p-1 bg-warning border border-light rounded-circle"></span>')
+                        $(dayClicked).children().append('<span class="dateBadge position-absolute top-0 start-100 translate-middle p-1  border border-light rounded-circle"></span>')
                     }
                 }else if(response == "messageEmpty"){
                     toastr.success("Salvo com sucesso.", "Pronto!")
@@ -427,6 +429,24 @@ delButton.addEventListener('click', ()=>{
         backButton.click()
     } else {
         return
+    }
+})
+
+divDarkMode.addEventListener('click', (e) => {
+    // if (divDarkMode.dataset.dark == 'off') {
+    //     divDarkMode.dataset.dark.toggle = 'on'
+    // }
+
+    // if (divDarkMode.dataset.dark == 'on') {
+    //     divDarkMode.dataset.dark = 'off'
+    // }
+    if (e.target.classList.contains('form-switch')) {
+        return
+    }else if(e.target.classList.contains('form-check-label')){
+        return
+    }else{
+        console.log(divDarkMode.classList)
+        divDarkMode.classList.toggle('on')
     }
 })
 

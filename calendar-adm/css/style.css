@@ -1,6 +1,17 @@
 :root{
+  --mainWhite: #ECF0F1;
   --dayColor: #2c3e50;
   --dayColorHover: #172e44;
+  --disabledColor: #aaa;
+  --todayColor: #ffa500;
+
+  /* --dayColor: #d4e1ed;
+    --dayColorHover: #c1c4c7;
+    --mainWhite: #000000;
+    --disabledColor: #856b6b;
+    --todayColor: #358de9;
+    
+    */
 }
 
 .calendar-box {
@@ -41,11 +52,11 @@
 }
 
 .day.disabled span {
-  color: #AAA;
+  color: var(--disabledColor);
 }
 
 .day.selected span {
-  background: orange;
+  background-color: var(--todayColor);
 }
 
 .day.today span {

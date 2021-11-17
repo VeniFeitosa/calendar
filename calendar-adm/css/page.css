@@ -1,6 +1,17 @@
 :root{
+  --mainWhite: #ECF0F1;
   --dayColor: #2c3e50;
   --dayColorHover: #172e44;
+  --disabledColor: #aaa;
+  --todayColor: #ffa500;
+  
+  /* --dayColor: #d4e1ed;
+    --dayColorHover: #c1c4c7;
+    --mainWhite: #000000;
+    --disabledColor: #856b6b;
+    --todayColor: #358de9;
+    
+    */
 }
 
 * {
@@ -19,7 +30,7 @@ body{
   height: 100vh;
 }
 .form-group{
-  width: 35%;
+  /* width: 35%; */
   align-self: center;
 }
 
@@ -35,14 +46,14 @@ body{
 
 #pesq{
   background-color: var(--dayColor);
-  color: white;
+  color: var(--mainWhite);
 }
 
 #pesq:hover{
   background-color: var(--dayColorHover);
 }
-#labelMes{
-  color: var(--dayColorHover);
+#labelMes, .form-check-label{
+  /* color: var(--dayColorHover); */
   font-weight: bold;
 }
 .form-select{
@@ -61,6 +72,18 @@ textarea{
 .tdButton{
   width: 25%;
 }
+.cont-header{
+  display: flex;
+  width: 80%;
+  justify-content: space-between;
+  flex-direction: column;
+}
+.form-switch{
+  align-self: center;
+}
+.dateBadge{
+  background-color: var(--todayColor);
+}
 
 @media (max-width: 425px){
   .form-group{
@@ -73,7 +96,7 @@ textarea{
 }
 @media (max-width: 755px){
   .form-group{
-    width: 65%;
+    /* width: 65%; */
   }
 }
 

@@ -1,6 +1,17 @@
 :root{
+  --mainWhite: #ECF0F1;
   --dayColor: #2c3e50;
   --dayColorHover: #172e44;
+  --disabledColor: #aaa;
+  --todayColor: #ffa500;
+
+  /* --dayColor: #d4e1ed;
+    --dayColorHover: #c1c4c7;
+    --mainWhite: #000000;
+    --disabledColor: #856b6b;
+    --todayColor: #358de9;
+    
+    */
 }
 
 .buttons-container {
@@ -15,7 +26,7 @@
     margin-bottom: 10px;
     margin-right: 5px;
     font-size: 22px;
-    color: #ECF0F1;
+    color: var(--mainWhite);
     font-weight: bold;
   }
   
@@ -64,7 +75,7 @@
     text-transform: uppercase;
     font-size: 120%;
     cursor: initial;
-    color: #ECF0F1;
+    color: var(--mainWhite);
     height: 35px;
   }
 
@@ -79,7 +90,7 @@
     line-height: 40px;
     border-radius: 50%;
     vertical-align: middle;
-    color: #ECF0F1;
+    color: var(--mainWhite);
   }
   
   .day.today span {
