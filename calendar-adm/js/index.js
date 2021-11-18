@@ -46,6 +46,8 @@ const backButton2 = document.querySelector('#backButton2')
 const delButton = document.querySelector('#delButton')
 //div checkbox darkmode
 const divDarkMode = document.querySelector('.form-switch')
+//input do darkmode
+const darkInput = document.querySelector('.form-check-input')
 
 //escondendo elementos não usados ao carregar a página
 $(form).hide()
@@ -56,6 +58,8 @@ $(backButton2).hide()
 $(delButton).hide()
 
 const data = new Date()
+
+const themeState = localStorage['darkMode']
 
 //configuração das toasts (alertas) show
 toastr.options = {
@@ -223,6 +227,41 @@ function generateTable(element, index) {
 
     tbody.appendChild(tr)
 }
+
+function setDarkMode() {
+    localStorage['darkMode'] = 'on'
+    
+    let r = document.querySelector(':root')
+
+    r.style.setProperty('--mainWhite', '#ECF0F1')
+    r.style.setProperty('--dayColor', '#2c3e50')
+    r.style.setProperty('--dayColorHover', '#172e44')
+    r.style.setProperty('--disabledColor', '#aaa')
+    r.style.setProperty('--todayColor', '#ffa500')
+    
+}
+
+function offDarkMode() {
+    localStorage['darkMode'] = 'off'
+    
+    let r = document.querySelector(':root')
+
+    r.style.setProperty('--mainWhite', '#000000')
+    r.style.setProperty('--dayColor', '#d4e1ed')
+    r.style.setProperty('--dayColorHover', '#c1c4c7')
+    r.style.setProperty('--disabledColor', '#856b6b')
+    r.style.setProperty('--todayColor', '#358de9')
+}
+
+$(document).ready( ()=>{
+    console.log(localStorage['darkMode'])
+    if (localStorage['darkMode'] == 'on') {
+        // setDarkMode()
+        $(darkInput).click()
+        divDarkMode.classList.add('on')
+        setDarkMode()
+    }
+} )
 
 
 // Eventos dos botoões
@@ -445,8 +484,13 @@ divDarkMode.addEventListener('click', (e) => {
     }else if(e.target.classList.contains('form-check-label')){
         return
     }else{
-        console.log(divDarkMode.classList)
         divDarkMode.classList.toggle('on')
+    }
+
+    if (divDarkMode.classList.contains('on')) {
+        setDarkMode()
+    }else{
+        offDarkMode()
     }
 })
 
