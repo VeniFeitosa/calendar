@@ -110,3 +110,220 @@ textarea{
     width: 80%;
   }
 }
+
+/* STYLE.CSS */
+
+.calendar-box {
+
+}
+
+.week {
+  overflow: hidden;
+  display: flex;
+}
+
+/* .day:last-child, .day:first-child{
+  border: 1px solid black;
+} */
+
+.week.highlight {
+  background: #efefef;
+}
+
+.day {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  float: left;
+  width: 14.28%;
+  text-align: center;
+  cursor: pointer;
+  box-sizing: border-box;
+  background-color: var(--dayColor);
+  margin-right: 5px;
+  height: 60px;
+  transition: 0.1s ease-in-out;
+}
+
+.day:hover{
+  background-color: var(--dayColorHover);
+}
+
+.day.disabled span {
+  color: var(--disabledColor);
+}
+
+.day.selected span {
+  background-color: var(--todayColor);
+}
+
+.day.today span {
+  /* font-weight: bold; */
+}
+
+.months-container.hidden, .weeks-container.hidden {
+  display: none;
+}
+
+.months-wrapper {
+  overflow: hidden;
+}
+
+.months-wrapper .month {
+  display: inline-block;
+  float: left;
+  width: 25%;
+  text-align: center;
+  cursor: pointer;
+}
+.months-wrapper .month.one-third {
+  width: 33.33%;
+}
+
+/* THEME.CSS */
+
+.buttons-container {
+  display: -webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+  align-items: center;
+  padding: 7px;
+  background-color: var(--dayColor);
+  margin-bottom: 10px;
+  margin-right: 5px;
+  font-size: 22px;
+  color: var(--mainWhite);
+  font-weight: bold;
+}
+
+.buttons-container .label-container {
+  display: inline-block;
+  -webkit-box-flex: 1;
+  -moz-box-flex: 1;
+  -webkit-flex: 1;
+  -ms-flex: 1;
+  flex: 1;
+  text-align: center;
+  text-transform: uppercase;
+  font-weight: bold;
+}
+
+.year-dropdown {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  border: none;
+  font-size: inherit;
+  font-weight: inherit;
+  font-family: inherit;
+  padding: 5px 20px;
+}
+
+.prev-button,
+.next-button {
+  background: transparent;
+  border: none;
+  padding: 10px;
+}
+
+.week {
+  margin: 5px 0;
+}
+
+.week.highlight {
+  border-radius: 5px;
+  background-color: #919da9;
+}
+
+
+.week .day.header {
+  font-weight: bold;
+  text-transform: uppercase;
+  font-size: 120%;
+  cursor: initial;
+  color: var(--mainWhite);
+  height: 35px;
+}
+
+.day.header:hover{
+  background-color: var(--dayColor);
+}
+
+.dateSpan {
+  display: inline-block;
+  width: 40px;
+  height: 40px;
+  line-height: 40px;
+  border-radius: 50%;
+  vertical-align: middle;
+  color: var(--mainWhite);
+}
+
+.day.today span {
+  position: relative;
+  display: inline-block;
+  /* font-size: 110%; */
+}
+
+/* weekend */
+
+/* sunday */
+
+/* start on monday - weekend */
+.week.start-on-monday .day:nth-child(6),
+.week.start-on-monday .day:last-child {
+  color: orange;
+}
+
+/* start on monday - sunday */
+.week.start-on-monday .day:last-child {
+  color: red;
+}
+
+/* .day.today span::after {
+  content: "";
+  position: absolute;
+  bottom: 7px;
+  left: 50%;
+  transform: translateX(-50%);
+  border-bottom: 2px solid orange;
+  width: 10px;
+  height: 1px;
+} */
+
+.day.sunday span {
+  color: #ff8a80;
+}
+
+.week .day.selected span {
+  /* background: #1565c0; */
+  color: var(--dayColorHover);
+}
+
+.week .day[disabled="disabled"] span {
+  color: #aaa;
+  cursor: not-allowed;
+}
+
+.months-wrapper .month span {
+  display: inline-block;
+  padding: 10px;
+  text-transform: capitalize;
+  margin-bottom: 10px;
+}
+
+.special-buttons {
+  text-align: center;
+  border-top: 1px solid #eee;
+  padding-top: 10px;
+}
+
+.today-button {
+  margin: 0 auto;
+  background: transparent;
+  border: none;
+  padding: 5px;
+}
