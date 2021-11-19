@@ -51,8 +51,8 @@
     <!-- Primeira Modal -->
     <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="modal1" aria-hidden="true">
         <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
+            <div class="modal-content" id="mc1">
+                <div class="modal-header" id="mh1">
                     <h4 class="modal-title" id="modal1"></h4>
                     <button type="button" class="btn-close exitButton" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
@@ -67,7 +67,7 @@
                         </table>
                         </div>
                     </div>
-                    <div class="modal-footer">
+                    <div class="modal-footer" id="mf1">
                         <button type="button" class="btn btn-success" id="addNewButton" data-bs-target="#exampleModalToggle2" data-bs-toggle="modal">Adicionar</button>
                         <button type="button" class="btn btn-primary" id="addButton" data-bs-target="#exampleModalToggle2" data-bs-toggle="modal">Adicionar</button>
                     </div>
@@ -79,8 +79,8 @@
     <!-- Segunda Modal -->
     <div class="modal fade" id="exampleModalToggle2" aria-hidden="true" aria-labelledby="modal2" tabindex="-1">
         <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
+            <div class="modal-content" id="mc2">
+                <div class="modal-header" id="mh2">
                     <h4 class="modal-title" id="modal2"></h4>
                     <button type="button" class="btn-close exitButton" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
@@ -97,7 +97,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="modal-footer">
+                <div class="modal-footer" id="mf2">
                     <button class="btn btn-secondary" id="backButton" data-bs-target="#exampleModal" data-bs-toggle="modal">Voltar</button>
                     <button class="btn btn-secondary" id="backButton2" data-bs-target="#exampleModal" data-bs-toggle="modal">Voltar</button>
                     <button type="button" class="btn btn-primary" id="saveButton" >Salvar</button>

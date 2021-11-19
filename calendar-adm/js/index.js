@@ -17,7 +17,7 @@ const modal = document.querySelector('.modal')
 //modal-body da primeira modal
 const modalBody1 = document.querySelector('#modal-body-1')
 //modal-content da primeira modal
-const modalContent = document.querySelector('.modal-content')
+const modalContent = document.querySelector('#mc1')
 
 //vai armazenar a data clicada
 let messageDate
@@ -232,7 +232,19 @@ function setDarkMode() {
     localStorage['darkMode'] = 'on'
     
     let r = document.querySelector(':root')
+    let mh1 = document.querySelector('#mh1')
+    let mf1 = document.querySelector('#mf1')
+    let mh2 = document.querySelector('#mh2')
+    let mf2 = document.querySelector('#mf2')
+    let mc2 = document.querySelector('#mc2')
 
+    modalContent.style.setProperty('background-color', '#2c3e50')
+    mc2.style.setProperty('background-color', '#2c3e50')
+    mh1.style.setProperty('border-bottom','none')
+    mf1.style.setProperty('border-top','none')
+    mh2.style.setProperty('border-bottom','none')
+    mf2.style.setProperty('border-top','none')
+    
     r.style.setProperty('--mainWhite', '#ECF0F1')
     r.style.setProperty('--dayColor', '#2c3e50')
     r.style.setProperty('--dayColorHover', '#172e44')
@@ -245,7 +257,17 @@ function offDarkMode() {
     localStorage['darkMode'] = 'off'
     
     let r = document.querySelector(':root')
+    let mh1 = document.querySelector('#mh1')
+    let mf1 = document.querySelector('#mf1')
 
+    modalContent.style.setProperty('background-color', '#ffff')
+    mc2.style.setProperty('background-color', '#ffff')
+    exitButton[0].style.setProperty('background-color', '#c1c4c7')
+    mh1.style.setProperty('border-bottom','none')
+    mf1.style.setProperty('border-top','none')
+    mh2.style.setProperty('border-bottom','none')
+    mf2.style.setProperty('border-top','none')
+    
     r.style.setProperty('--mainWhite', '#000000')
     r.style.setProperty('--dayColor', '#d4e1ed')
     r.style.setProperty('--dayColorHover', '#c1c4c7')

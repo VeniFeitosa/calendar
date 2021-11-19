@@ -5,6 +5,7 @@
   --disabledColor: #aaa;
   --todayColor: #ffa500; */
   
+
   --mainWhite: #000000;
   --dayColor: #d4e1ed;
   --dayColorHover: #c1c4c7;
@@ -64,6 +65,7 @@ body{
 }
 .noContent{
   display: none;
+  color: var(--mainWhite);
 }
 textarea{
   resize: none;
@@ -82,6 +84,18 @@ textarea{
 }
 .dateBadge{
   background-color: var(--todayColor);
+}
+#modal1{
+  color: var(--mainWhite);
+}
+.exitButton{
+  background-color: white;
+}
+td{
+  color: var(--mainWhite);
+}
+#modal2, .contentM2{
+  color: var(--mainWhite);
 }
 
 @media (max-width: 425px){
